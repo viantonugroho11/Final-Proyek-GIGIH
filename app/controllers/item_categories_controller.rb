@@ -7,7 +7,7 @@ class ItemCategoriesController < ApplicationController
   end
 
   # GET /item_categories/1 or /item_categories/1.json
-  def show
+  def showgi
   end
 
   # GET /item_categories/new
