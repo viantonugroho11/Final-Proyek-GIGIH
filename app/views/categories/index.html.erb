@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Data Categories</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered">
+          <div id="categories">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th style="width: 40px">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @categories.each do |category| %>
+              <%= render category %>
+              <% end %>
+            </tbody>
+          </div>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.col -->
+</div>
+<%= link_to "New category", new_category_path %>
