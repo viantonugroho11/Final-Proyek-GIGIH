@@ -1,0 +1,42 @@
+<%= form_with(model: transaction) do |form| %>
+<div class="card-body">
+
+  <% if transaction.errors.any? %>
+  <div style="color: red">
+    <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+    <ul>
+      <% transaction.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name, style: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :no_phone, style: "display: block" %>
+    <%= form.text_field :no_phone, style: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address, style: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.email_field :email, style: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+    <a href="<%= url_for(action: :index) %>" class="btn btn-secondary">Cancel</a>
+    <a href="<%= url_for(action: :show, id: transaction.id) %>" class="btn btn-primary">Done</a>
+  </div>
+</div>
+<% end %>
