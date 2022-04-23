@@ -1,0 +1,22 @@
+<div id="<%= dom_id item_category %>">
+  <tr>
+    <td>
+      <strong>Category:</strong>
+      <!-- <%= item_category.category_id %> -->
+      <%= item_category.category.name %>
+    </td>
+  
+    <td>
+      <strong>Item:</strong>
+      <!-- <%= item_category.item_id %> -->
+      <%= item_category.item.name %>
+    </td>
+
+    <td>
+      <%= link_to "Edit", edit_item_category_path(item_category) %> |
+      <%= link_to "Delete", item_category, method: :delete, data: { confirm: "Are you sure?" } %> |
+      <%= link_to "Show this item_category", item_category %>
+    </td>
+  </tr>
+
+</div>

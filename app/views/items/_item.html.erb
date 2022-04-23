@@ -1,0 +1,30 @@
+<div id="<%= dom_id item %>">
+  <tr>
+    <td>
+      <strong>Name:</strong>
+      <%= item.name %>
+    </td>
+  
+    <td>
+      <strong>Price:</strong>
+      <%= item.price %>
+    </td>
+  
+    <!-- <p>
+      <strong>Image:</strong>
+      <%= item.image %>
+    </p> -->
+  
+    <td>
+      <strong>Description:</strong>
+      <%= item.description %>
+    </td>
+    <td>
+      <%= link_to "Edit", edit_item_path(item) %> |
+      <%= link_to "Delete", item, method: :delete, data: { confirm: "Are you sure?" } %> |
+      <%= link_to "Show this item", item %>
+    </td>
+  </tr>
+
+
+</div>
