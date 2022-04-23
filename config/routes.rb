@@ -22,15 +22,6 @@ Rails.application.routes.draw do
     delete '/order/:id/:itemid', to: 'order#destroy'
   end
 
-  scope module: 'user' do
-    get '/', to: 'home#index'
-    get '/transactions', to: 'transaction#new'
-    post '/transactions', to: 'transaction#create', as: 'user_transactions'
-
-    get '/order/:id', to: 'order#new'
-    post '/order/:id', to: 'order#create'
-  end
-
 
   # root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
