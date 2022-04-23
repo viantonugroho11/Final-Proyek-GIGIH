@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
     get '/dashboard', to: 'home#index'
   
-    get '/order/:id', to: 'order#index'
+    get '/order/:id', to: 'order#index', as: 'orders'
     get '/order/:id/new', to: 'order#new'
     get '/order/:id/:itemid', to: 'order#show'
     get '/order/:id/:itemid/edit', to: 'order#edit'

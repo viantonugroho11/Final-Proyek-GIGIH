@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to '/admin/order/' + @transaction.id.to_s, notice: "Transaction was successfully created." }
+        format.html { redirect_to '/admin/order/' + @transaction.id.to_s + '/new' , notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:name, :no_phone, :address, :count_item, :email, :total_price, :status)
+      params.require(:transaction).permit(:name, :no_phone, :address, :count_item, :email, :total_price, :status=>"NEW")
     end
 end

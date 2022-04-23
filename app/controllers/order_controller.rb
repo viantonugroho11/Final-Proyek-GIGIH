@@ -3,10 +3,10 @@ before_action :set_transaction, only: [:create, :new]
 
   def create
     @order = Order.new(order_params)
-    @transaction.update(:count=>@transaction.count_item + 1)
+    @transaction.update(:count_item=>@sum_count_transaction)
     respond_to do |format|
       if @order.save
-        format.html { render :new, notice: "Item was successfully created." }
+        format.html { redirect_to '/admin/order/' + @transaction.id.to_s + '/new' , notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -17,7 +17,7 @@ before_action :set_transaction, only: [:create, :new]
   
   def new
     @item = Item.all
-    @transaction = Transaction.new
+    @order = Order.new
   end
 
   private
@@ -27,6 +27,24 @@ before_action :set_transaction, only: [:create, :new]
     end
 
     def order_params
-      params.require(:order).permit(:item_id, :count, :price, :total => :price * :count, :transaction_id=>params[:id])
+      params.require(:order).permit(:item_id, :count, 
+        :price => check_price, 
+        :total => sum_price, 
+        :transaction_id=>(params[:id]))
     end
+
+    def check_price
+      @item = Item.where(:id => params[:order][:item_id]).first.price
+      return @item
+    end
+
+    def sum_price
+      @sum_price = params[:order][:price].to_i * params[:order][:count].to_i
+      return @sum_price
+    end
+
+    def sum_count_transaction
+      return @sum_count_transaction = 1 + @transaction.count
+    end
+
 end
