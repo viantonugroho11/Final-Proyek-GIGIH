@@ -25,15 +25,16 @@ class AuthController < ApplicationController
     user = Admin.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path
+      session[:user_name] = user.name
+      redirect_to '/dashboard'
     else
       flash[:notice] = "Invalid email or password"
-      redirect_to auth_path
+      redirect_to '/'
     end
   end
 
   def postLogout
     session[:user_id] = nil
-    redirect_to auth_path
+    redirect_to '/'
   end
 end
