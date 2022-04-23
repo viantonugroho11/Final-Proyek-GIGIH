@@ -25,7 +25,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to _transaction_url(@transaction), notice: "Transaction was successfully created." }
+        format.html { redirect_to '/admin/order/' + @usertransaction.id.to_s, notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }

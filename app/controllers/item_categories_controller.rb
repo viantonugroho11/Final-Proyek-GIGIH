@@ -7,11 +7,13 @@ class ItemCategoriesController < ApplicationController
   end
 
   # GET /item_categories/1 or /item_categories/1.json
-  def showgi
+  def show
   end
 
   # GET /item_categories/new
   def new
+    @items = Item.all
+    @categories = Category.all
     @item_category = ItemCategory.new
   end
 
@@ -22,10 +24,11 @@ class ItemCategoriesController < ApplicationController
   # POST /item_categories or /item_categories.json
   def create
     @item_category = ItemCategory.new(item_category_params)
+    
 
     respond_to do |format|
       if @item_category.save
-        format.html { redirect_to _item_category_url(@item_category), notice: "Item category was successfully created." }
+        format.html { redirect_to item_category_url(@item_category), notice: "Item category was successfully created." }
         format.json { render :show, status: :created, location: @item_category }
       else
         format.html { render :new, status: :unprocessable_entity }
