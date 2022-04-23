@@ -1,24 +1,35 @@
 Rails.application.routes.draw do
-  resources :transactions
-  resources :item_categories
-  resources :categories
-  resources :items
-
+  scope '/admin' do
+    resources :transactions
+    resources :item_categories
+    resources :categories
+    resources :items
   
-  get '/', to: 'auth#index'
-  get '/register', to: 'auth#register'
-  post '/login', to: 'auth#postLogin'
-  get '/logout', to: 'auth#postLogout'
+    
+    get '/', to: 'auth#index'
+    get '/register', to: 'auth#register'
+    post '/login', to: 'auth#postLogin'
+    get '/logout', to: 'auth#postLogout'
+  
+    get '/dashboard', to: 'home#index'
+  
+    get '/order/:id', to: 'order#index'
+    get '/order/:id/new', to: 'order#new'
+    get '/order/:id/:itemid', to: 'order#show'
+    get '/order/:id/:itemid/edit', to: 'order#edit'
+    post '/order/:id', to: 'order#create'
+    patch '/order/:id/:itemid', to: 'order#update'
+    delete '/order/:id/:itemid', to: 'order#destroy'
+  end
 
-  get '/dashboard', to: 'home#index'
+  scope module: 'user' do
+    get '/', to: 'home#index'
+    get '/transactions', to: 'transaction#new'
+    post '/transactions', to: 'transaction#create', as: 'user_transactions'
 
-  get '/order/:id', to: 'order#index'
-  get '/order/:id/new', to: 'order#new'
-  get '/order/:id/:itemid', to: 'order#show'
-  get '/order/:id/:itemid/edit', to: 'order#edit'
-  post '/order/:id', to: 'order#create'
-  patch '/order/:id/:itemid', to: 'order#update'
-  delete '/order/:id/:itemid', to: 'order#destroy'
+    get '/order/:id', to: 'order#new'
+    post '/order/:id', to: 'order#create'
+  end
 
 
   # root to: 'home#index'
