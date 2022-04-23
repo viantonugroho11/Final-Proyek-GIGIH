@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :items
 
+  
+  get '/', to: 'auth#index'
+  get '/register', to: 'auth#register'
+
   # root to: 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
