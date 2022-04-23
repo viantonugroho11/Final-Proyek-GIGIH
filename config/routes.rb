@@ -13,22 +13,13 @@ Rails.application.routes.draw do
   
     get '/dashboard', to: 'home#index'
   
-    get '/order/:id', to: 'order#index'
+    get '/order/:id', to: 'order#index', as: 'orders'
     get '/order/:id/new', to: 'order#new'
     get '/order/:id/:itemid', to: 'order#show'
     get '/order/:id/:itemid/edit', to: 'order#edit'
     post '/order/:id', to: 'order#create'
     patch '/order/:id/:itemid', to: 'order#update'
     delete '/order/:id/:itemid', to: 'order#destroy'
-  end
-
-  scope module: 'user' do
-    get '/', to: 'home#index'
-    get '/transactions', to: 'transaction#new'
-    post '/transactions', to: 'transaction#create', as: 'user_transactions'
-
-    get '/order/:id', to: 'order#new'
-    post '/order/:id', to: 'order#create'
   end
 
 
