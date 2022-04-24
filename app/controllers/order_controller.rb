@@ -3,6 +3,8 @@ before_action :set_transaction, only: [:create, :new]
 
   def create
     @order = Order.new(order_params)
+    @order.transaction_id = @transaction.id
+    @order.price = check_price
     @transaction.update(:count_item=>@sum_count_transaction)
     respond_to do |format|
       if @order.save
@@ -30,12 +32,11 @@ before_action :set_transaction, only: [:create, :new]
       params.require(:order).permit(:item_id, :count, 
         :price => check_price, 
         :total => sum_price, 
-        :transaction_id=>(params[:id]))
+        :transaction_id=>@transaction.id)
     end
 
     def check_price
       @item = Item.where(:id => params[:order][:item_id]).first.price
-      return @item
     end
 
     def sum_price
